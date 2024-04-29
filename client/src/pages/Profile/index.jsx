@@ -6,23 +6,33 @@ import UserProfile from '../../components/UserProfile';
 import styles from './ProfilePage.module.scss';
 import UserContext from '../../contexts/userContext';
 import UpdateUserForm from '../../components/formComponents/UpdateUserForm';
+import DeleteConfirmationModal from '../../components/modals/DeleteConfirmationModal';
 
 const ProfilePage = (props) => {
   const [isProfileUpdating, setIsProfileUpdating] = useState(false);
+  const [isModalVisible, setIsModalVisible] = useState(false);
   const [{ user }, dispatch] = useContext(UserContext);
   const history = useHistory();
 
   const handleDeleteProfile = () => {
+    setIsModalVisible(true);
     // TODO переробити на запит на сервер
     // видаляємо дані про користувача
-    dispatch({ type: 'logout' });
+    // dispatch({ type: 'logout' });
     // автоматично перенести на головну сторінку
-    history.replace('/');
+    // history.replace('/');
+  };
+
+  const closeModal = () => {
+    setIsModalVisible(false);
   };
 
   return (
     <>
       <Header />
+      {isModalVisible && (
+        <DeleteConfirmationModal closeModal={closeModal} userId={user?._id} />
+      )}
       <section className={styles.container}>
         <aside className={styles.aside}>
           <button

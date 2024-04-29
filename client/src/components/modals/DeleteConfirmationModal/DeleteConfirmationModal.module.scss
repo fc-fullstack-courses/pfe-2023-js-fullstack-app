@@ -1,0 +1,20 @@
+.background {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  z-index: 100;
+  background-color: #333333;
+  opacity: 0.5;
+}
+
+.modalWindow {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  max-width: 300px;
+  padding: 30px 20px;
+  background-color: white;
+  z-index: 101;
+  border-radius: 10px;
+}
