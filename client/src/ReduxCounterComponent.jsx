@@ -35,11 +35,11 @@ const ReduxCounterComponent = (props) => {
 
 // функція яка вказує яку частину редаксівсьокго стейту передвати в пропси компоненту
 function mapStateToProps(state) {
+  const { theme, counter } = state;
   // об'єкт, який функція повертає буде заспреджено до пропсів
   return {
-    count: state.count,
-    step: state.step,
-    theme: state.currentTheme,
+    ...counter,
+    theme: theme.currentTheme,
     // test: 'this is from mapStateToProps'
   };
 }

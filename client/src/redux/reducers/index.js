@@ -1,38 +1,29 @@
-import ACTION_TYPES from '../actions/actionTypes';
-import CONSTANTS from '../../constants';
+import { combineReducers } from "redux";
+import counterReducer from "./counterReducer";
+import themeReducer from "./themeReducer";
 
-const initialState = {
-  count: 0,
-  step: 1,
-  currentTheme: CONSTANTS.THEMES.DARK_THEME,
-};
+/*
+  combineReducers приймає об'єкт властивостями якого є усі
+  спеціалізовані редюсери в додатку і повертає сгенерований на їх
+  основі кореневий редюсер
 
-// редюсер редаксу приймай початковий стан як значення за замовчанням для першого аргументу
-function rootReducer(state = initialState, action) {
-  // найчастіше в редюсерах використовують switch ... case
-  switch (action.type) {
-    case ACTION_TYPES.INCREMENT: {
-      // формуємо новий стан та повертаємо його з редюсеру
-      const newState = {
-        ...state,
-        count: state.count + state.step,
-      };
+*/
+const rootReducer = combineReducers({
+  counter: counterReducer,
+  theme: themeReducer
+});
 
-      return newState;
-    }
-    case ACTION_TYPES.DECREMENT: {
-      return { ...state, count: state.count - state.step };
-    }
-    case ACTION_TYPES.CHANGE_STEP: {
-      return { ...state, step: Number(action.payload) };
-    }
-    case ACTION_TYPES.CHANGE_THEME: {
-      return { ...state, currentTheme: action.payload };
-    }
-    // якщо action.type невідомий то стан не змінюємо
-    default:
-      return state;
+/*
+  стейт в сторі в такому випадку
+  state = {
+    counter: {
+      count: 0,
+      step: 1,
+    },
+    theme: {
+      currentTheme: 'light'
+    },
   }
-}
+*/
 
 export default rootReducer;

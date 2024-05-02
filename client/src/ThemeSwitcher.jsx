@@ -20,7 +20,7 @@ const ThemeSwitcher = ({theme, changeTheme}) => {
 };
 
 const mStP = (state) => ({
-  theme: state.currentTheme
+  theme: state.theme.currentTheme
 });
 
 const mDtp = dispatch => ({
