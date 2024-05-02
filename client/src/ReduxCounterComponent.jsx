@@ -1,22 +1,20 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import ACTION_TYPES from './redux/actions/actionTypes';
+import * as ActionCreators from './redux/actions/actionCreators';
 
 const ReduxCounterComponent = (props) => {
   const { count, step, dispatch } = props;
 
   const handleIncrement = () => {
-    const incrementAction = {
-      type: ACTION_TYPES.INCREMENT,
-    };
+    const incrementAction = ActionCreators.incrementCreator();
 
     dispatch(incrementAction);
   };
 
-  const handleDecrement = () => dispatch({ type: ACTION_TYPES.DECREMENT });
+  const handleDecrement = () => dispatch(ActionCreators.decrementCreator());
 
   const handleChangeStep = ({ target: { value } }) =>
-    dispatch({ type: ACTION_TYPES.CHANGE_STEP, payload: value });
+    dispatch(ActionCreators.changeStepCreator(value));
 
   return (
     <div>
