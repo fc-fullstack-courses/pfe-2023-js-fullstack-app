@@ -1,3 +1,5 @@
+import ACTION_TYPES from '../actions/actionTypes';
+
 const initialState = {
   count: 0,
   step: 1,
@@ -7,7 +9,7 @@ const initialState = {
 function rootReducer(state = initialState, action) {
   // найчастіше в редюсерах використовують switch ... case
   switch (action.type) {
-    case 'increment': {
+    case ACTION_TYPES.INCREMENT: {
       // формуємо новий стан та повертаємо його з редюсеру
       const newState = {
         ...state,
@@ -16,10 +18,10 @@ function rootReducer(state = initialState, action) {
 
       return newState;
     }
-    case 'decrement': {
+    case ACTION_TYPES.DECREMENT: {
       return { ...state, count: state.count - state.step };
     }
-    case 'changeStep': {
+    case ACTION_TYPES.CHANGE_STEP: {
       return { ...state, step: Number(action.payload) };
     }
     // якщо action.type невідомий то стан не змінюємо
