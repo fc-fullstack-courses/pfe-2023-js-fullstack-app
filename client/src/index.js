@@ -8,6 +8,7 @@ import './index.css';
 import App from './App';
 import UseReducerComponent from './UseReducerComponent';
 import ReduxCounterComponent from './ReduxCounterComponent';
+import { composeWithDevTools } from '@redux-devtools/extension';
 
 const initialState = {
   count: 0,
@@ -30,8 +31,8 @@ function reducer(state = initialState, action) {
     case 'decrement': {
       return { ...state, count: state.count - state.step };
     }
-    case 'changeStep' : {
-      return { ...state, step: Number(action.payload) }
+    case 'changeStep': {
+      return { ...state, step: Number(action.payload) };
     }
     // якщо action.type невідомий то стан не змінюємо
     default:
@@ -41,7 +42,7 @@ function reducer(state = initialState, action) {
 
 // треба створити стору (сховище) для стану редакса
 // стора вимагає щоб їй передали редюсер для глобального стану
-const store = createStore(reducer);
+const store = createStore(reducer, composeWithDevTools());
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
