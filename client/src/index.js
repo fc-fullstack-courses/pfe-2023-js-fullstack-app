@@ -11,6 +11,7 @@ import ReduxCounterComponent from './ReduxCounterComponent';
 
 const initialState = {
   count: 0,
+  step: 1,
 };
 
 // редюсер редаксу приймай початковий стан як значення за замовчанням для першого аргументу
@@ -21,10 +22,16 @@ function reducer(state = initialState, action) {
       // формуємо новий стан та повертаємо його з редюсеру
       const newState = {
         ...state,
-        count: state.count + 1,
+        count: state.count + state.step,
       };
 
       return newState;
+    }
+    case 'decrement': {
+      return { ...state, count: state.count - state.step };
+    }
+    case 'changeStep' : {
+      return { ...state, step: Number(action.payload) }
     }
     // якщо action.type невідомий то стан не змінюємо
     default:
