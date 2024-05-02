@@ -4,7 +4,8 @@
 const ACTION_TYPES = {
   INCREMENT: 'increment',
   DECREMENT: 'decrement',
-  CHANGE_STEP: 'changeStep'
+  CHANGE_STEP: 'changeStep',
+  CHANGE_THEME: 'changeTheme'
 }
 
 export default ACTION_TYPES;

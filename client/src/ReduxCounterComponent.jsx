@@ -1,16 +1,30 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import cx from 'classnames';
 import * as ActionCreators from './redux/actions/actionCreators';
+import styles from './ReduxCounterComponent.module.scss';
+import CONSTANTS from './constants';
+
+const { THEMES } = CONSTANTS;
 
 const ReduxCounterComponent = (props) => {
-  const { count, step, increment, decrement, changeStep } = props;
+  const { count, step, theme, increment, decrement, changeStep } = props;
+
+  const className = cx(styles.container, {
+    [styles.darkTheme]: theme === THEMES.DARK_THEME,
+    [styles.lightTheme]: theme === THEMES.LIGHT_THEME,
+  });
 
   return (
-    <div>
+    <div className={className}>
       <p>Current count is {count}</p>
       <div>
         <label>
-          <input type='number' value={step} onChange={({target: {value}}) => changeStep(value)} />
+          <input
+            type='number'
+            value={step}
+            onChange={({ target: { value } }) => changeStep(value)}
+          />
         </label>
       </div>
       <button onClick={increment}>Increment</button>
@@ -25,6 +39,7 @@ function mapStateToProps(state) {
   return {
     count: state.count,
     step: state.step,
+    theme: state.currentTheme,
     // test: 'this is from mapStateToProps'
   };
 }
@@ -50,7 +65,7 @@ const mapDispatchToProps = {
   increment: ActionCreators.incrementCreator,
   decrement: ActionCreators.decrementCreator,
   changeStep: ActionCreators.changeStepCreator,
-}
+};
 
 // function test(actionCreator) {
 

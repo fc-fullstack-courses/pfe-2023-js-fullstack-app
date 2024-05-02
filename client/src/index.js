@@ -8,6 +8,7 @@ import App from './App';
 import UseReducerComponent from './UseReducerComponent';
 import ReduxCounterComponent from './ReduxCounterComponent';
 import store from './redux/store';
+import ThemeSwitcher from './ThemeSwitcher';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -17,6 +18,7 @@ root.render(
   // </Router>
   // </React.StrictMode>
   <Provider store={store}>
+    <ThemeSwitcher />
     <ReduxCounterComponent />
   </Provider>
 );

@@ -23,3 +23,8 @@ export const changeStepCreator = (newStep) => ({
   type: ACTION_TYPES.CHANGE_STEP,
   payload: newStep,
 });
+
+export const changeThemeCreator = (newTheme) => ({
+  type: ACTION_TYPES.CHANGE_THEME,
+  payload: newTheme
+});
