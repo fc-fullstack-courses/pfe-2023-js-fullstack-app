@@ -91,7 +91,7 @@ export const login = async (loginData) => httpClient.post('/auth/login', loginDa
 export const refresh = async (token) => httpClient.post('/auth/refresh', { token });
 
 export const logout = () => {
-  window.localStorage.removeItem('token');
+  window.localStorage.removeItem(CONSTANTS.REFRESH_TOKEN);
 };
 
 export async function getUser(userId) {
