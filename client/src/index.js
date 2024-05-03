@@ -9,6 +9,7 @@ import UseReducerComponent from './UseReducerComponent';
 import ReduxCounterComponent from './ReduxCounterComponent';
 import store from './redux/store';
 import ThemeSwitcher from './ThemeSwitcher';
+import ReduxCounterHooksComponent from './ReduxCounterHooksComponent';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -18,8 +19,10 @@ root.render(
     <Router>
       <App />
     </Router>
+    <ReduxCounterHooksComponent />
+    <ReduxCounterComponent />
     {/* <ThemeSwitcher />
-    <ReduxCounterComponent /> */}
+     */}
   </Provider>
 );
 
