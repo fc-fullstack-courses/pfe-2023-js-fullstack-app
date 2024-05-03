@@ -13,13 +13,13 @@ import ThemeSwitcher from './ThemeSwitcher';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   // <React.StrictMode>
-  // <Router>
-  //   <App />
-  // </Router>
   // </React.StrictMode>
   <Provider store={store}>
-    <ThemeSwitcher />
-    <ReduxCounterComponent />
+    <Router>
+      <App />
+    </Router>
+    {/* <ThemeSwitcher />
+    <ReduxCounterComponent /> */}
   </Provider>
 );
 

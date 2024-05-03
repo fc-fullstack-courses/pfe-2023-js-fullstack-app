@@ -1,33 +1,42 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
+import { connect } from 'react-redux';
 import cx from 'classnames';
 import { login } from '../../api';
 import { USER_LOGIN_SCHEMA } from '../../validation/userValidation';
 import styles from './LoginForm.module.scss';
-import UserContext from '../../contexts/userContext';
+import * as UserActionCreators from '../../redux/actions/userActionCreators';
 
 const initialValues = {
   email: '',
   password: '',
 };
 
-const LoginForm = (props) => {
-  const [ { isLoading, error } , dispatch] = useContext(UserContext);
-
+const LoginForm = ({
+  isLoading,
+  error,
+  userRequest,
+  userSuccess,
+  userError,
+}) => {
   const handleSubmit = async (values, formikBag) => {
-
-    // запам'ятовуємо у стані що робимо запит на сервер 
-    dispatch({ type: 'userRequest'});
+    // запам'ятовуємо у стані що робимо запит на сервер
+    userRequest();
 
     try {
-      const {data: {data: {user}}} = await login(values);
+      const {
+        data: {
+          data: { user },
+        },
+      } = await login(values);
       // при успішному запиту зберігаємо юзера
-      dispatch({type: 'userSuccess', user});
+
+      userSuccess(user);
     } catch (error) {
       // при неуспішному запиту зберігаємо помилку
-      dispatch({type: 'userError', error});
+      userError(error);
     }
-    
+
     formikBag.resetForm();
   };
 
@@ -79,4 +88,10 @@ const LoginForm = (props) => {
   );
 };
 
-export default LoginForm;
+const mStP = (state) => state.user;
+
+const mDtP = {
+  ...UserActionCreators,
+};
+
+export default connect(mStP, mDtP)(LoginForm);

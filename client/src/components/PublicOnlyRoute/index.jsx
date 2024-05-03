@@ -1,6 +1,7 @@
-import React, { useContext } from 'react';
+import React from 'react';
+import { connect } from 'react-redux';
 import { Route, Redirect } from 'react-router-dom';
-import UserContext from '../../contexts/userContext';
+
 
 /*
   Опціональне ДЗ:
@@ -8,8 +9,7 @@ import UserContext from '../../contexts/userContext';
     переходити на певні сторінки на фронті (реєстрації, логін)
 */
 
-const PublicOnlyRoute = (props) => {
-  const [{ user, isLoading }] = useContext(UserContext);
+const PublicOnlyRoute = ({ user, isLoading, error, ...props }) => {
 
   // якщо  дані користувача магаються отримати то можна про це споівстити користувача
   if (isLoading) {
@@ -25,4 +25,6 @@ const PublicOnlyRoute = (props) => {
   return <Route {...props} />;
 }
 
-export default PublicOnlyRoute;
+const mStp = state => state.user;
+
+export default connect(mStp)(PublicOnlyRoute);

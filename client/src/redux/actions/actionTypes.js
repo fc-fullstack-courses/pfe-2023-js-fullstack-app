@@ -2,10 +2,14 @@
 // щоб використовувати його як джерело істини
 // для редюсерів та екшенів
 const ACTION_TYPES = {
-  INCREMENT: 'increment',
-  DECREMENT: 'decrement',
-  CHANGE_STEP: 'changeStep',
-  CHANGE_THEME: 'changeTheme'
+  INCREMENT: 'counter/increment',
+  DECREMENT: 'counter/decrement',
+  CHANGE_STEP: 'counter/changeStep',
+  CHANGE_THEME: 'theme/changeTheme',
+  USER_AUTH_REQUEST: 'user/userRequest',
+  USER_AUTH_SUCCESS: 'user/userSuccess',
+  USER_AUTH_ERROR: 'user/userError',
+  LOGOUT: 'logout'
 }
 
 export default ACTION_TYPES;

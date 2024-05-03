@@ -1,18 +1,17 @@
-import React, { useContext } from 'react';
+import React from 'react';
+import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
-import styles from './Header.module.scss';
-import UserContext from '../../contexts/userContext';
 import { logout } from '../../api';
+import { logout as logoutActionCreator } from '../../redux/actions/userActionCreators';
+import styles from './Header.module.scss';
 
-const Header = (props) => {
-  const [{ user }, dispatch] = useContext(UserContext);
-
+const Header = ({logoutAction, user, isLoading, error}) => {
   const handleLogout = () => {
     // видаляємо токен з локалСтораджу
     logout();
 
     // видаляємо користувача зі стейту
-    dispatch({ type: 'logout' });
+    logoutAction();
   };
 
   return (
@@ -97,4 +96,10 @@ const Header = (props) => {
   );
 };
 
-export default Header;
+const mStP = (state) => state.user;
+
+const mDtP = (dispatch) => ({
+  logoutAction: () => dispatch(logoutActionCreator()),
+});
+
+export default connect(mStP, mDtP)(Header);

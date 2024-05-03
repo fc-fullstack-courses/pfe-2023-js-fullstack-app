@@ -1,6 +1,7 @@
 import { combineReducers } from "redux";
 import counterReducer from "./counterReducer";
 import themeReducer from "./themeReducer";
+import userReducer from "./userReducer";
 
 /*
   combineReducers приймає об'єкт властивостями якого є усі
@@ -10,7 +11,8 @@ import themeReducer from "./themeReducer";
 */
 const rootReducer = combineReducers({
   counter: counterReducer,
-  theme: themeReducer
+  theme: themeReducer,
+  user: userReducer
 });
 
 /*
