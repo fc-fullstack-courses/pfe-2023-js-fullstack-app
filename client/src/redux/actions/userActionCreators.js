@@ -1,5 +1,10 @@
 import ACTION_TYPES from './actionTypes';
 
+export const userLoginRequest = (userLoginData) => ({
+  type: ACTION_TYPES.USER_LOGIN_REQUEST,
+  payload: userLoginData
+});
+
 export const userRequest = () => ({
   type: ACTION_TYPES.USER_AUTH_REQUEST,
 });

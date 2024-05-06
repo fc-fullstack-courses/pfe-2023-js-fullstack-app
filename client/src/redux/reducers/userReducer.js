@@ -11,6 +11,7 @@ function userReducer(state = initialState, action) {
   // з редюсеру завжди повертається стан
 
   switch (action.type) {
+    case ACTION_TYPES.USER_LOGIN_REQUEST:
     case ACTION_TYPES.USER_AUTH_REQUEST: {
       const newState = {
         ...state,

@@ -2,7 +2,6 @@ import React from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { connect } from 'react-redux';
 import cx from 'classnames';
-import { login } from '../../api';
 import { USER_LOGIN_SCHEMA } from '../../validation/userValidation';
 import styles from './LoginForm.module.scss';
 import * as UserActionCreators from '../../redux/actions/userActionCreators';
@@ -15,27 +14,11 @@ const initialValues = {
 const LoginForm = ({
   isLoading,
   error,
-  userRequest,
-  userSuccess,
-  userError,
+  userLoginRequest,
 }) => {
   const handleSubmit = async (values, formikBag) => {
     // запам'ятовуємо у стані що робимо запит на сервер
-    userRequest();
-
-    try {
-      const {
-        data: {
-          data: { user },
-        },
-      } = await login(values);
-      // при успішному запиту зберігаємо юзера
-
-      userSuccess(user);
-    } catch (error) {
-      // при неуспішному запиту зберігаємо помилку
-      userError(error);
-    }
+    userLoginRequest(values);
 
     formikBag.resetForm();
   };

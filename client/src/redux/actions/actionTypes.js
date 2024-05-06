@@ -6,6 +6,7 @@ const ACTION_TYPES = {
   DECREMENT: 'counter/decrement',
   CHANGE_STEP: 'counter/changeStep',
   CHANGE_THEME: 'theme/changeTheme',
+  USER_LOGIN_REQUEST: 'user/userLoginRequest',
   USER_AUTH_REQUEST: 'user/userRequest',
   USER_AUTH_SUCCESS: 'user/userSuccess',
   USER_AUTH_ERROR: 'user/userError',
