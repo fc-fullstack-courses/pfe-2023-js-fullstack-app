@@ -1,6 +1,6 @@
 import { takeEvery } from 'redux-saga/effects';
 import ACTION_TYPES from '../actions/actionTypes';
-import { loginSaga } from './userSagas';
+import { loginSaga, refreshSaga } from './userSagas';
 
 // Обов'язково генератор
 // сага - функція генератор, яка певним чином використовується бібліотекою
@@ -10,6 +10,7 @@ import { loginSaga } from './userSagas';
 function* rootSaga() {
   // кажемо що ми будемо реагувати на кожен екшн з пеаним типом
   yield takeEvery(ACTION_TYPES.USER_LOGIN_REQUEST, loginSaga);
+  yield takeEvery(ACTION_TYPES.USER_REFRESH_REQUEST, refreshSaga);
 }
 
 export default rootSaga;

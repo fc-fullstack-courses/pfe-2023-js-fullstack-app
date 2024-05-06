@@ -1,4 +1,4 @@
-import {put} from 'redux-saga/effects';
+import { put } from 'redux-saga/effects';
 import * as API from '../../api';
 import { userError, userSuccess } from '../actions/userActionCreators';
 
@@ -20,6 +20,20 @@ export function* loginSaga(action) {
     yield put(userSuccess(user));
   } catch (error) {
     // при невдачі діспатчімо у стор екшн з помилкою
+    yield put(userError(error));
+  }
+}
+
+export function* refreshSaga(action) {
+  try {
+    const {
+      data: {
+        data: { user },
+      },
+    } = yield API.refresh(action.payload);
+
+    yield put(userSuccess(user));
+  } catch (error) {
     yield put(userError(error));
   }
 }

@@ -5,6 +5,11 @@ export const userLoginRequest = (userLoginData) => ({
   payload: userLoginData
 });
 
+export const userRefreshRequest = (refreshToken) => ({
+  type: ACTION_TYPES.USER_REFRESH_REQUEST,
+  payload: refreshToken
+});
+
 export const userRequest = () => ({
   type: ACTION_TYPES.USER_AUTH_REQUEST,
 });
