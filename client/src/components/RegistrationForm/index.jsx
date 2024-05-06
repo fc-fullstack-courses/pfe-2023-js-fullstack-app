@@ -1,10 +1,12 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
+import { bindActionCreators } from 'redux';
+import { useDispatch } from 'react-redux';
 import cx from 'classnames';
 import { registration } from '../../api';
 import { USER_REGISTRATION_SCHEMA } from '../../validation/userValidation';
 import styles from './RegistrationForm.module.scss';
-import UserContext from '../../contexts/userContext';
+import * as UserActionCreators from '../../redux/actions/userActionCreators';
 
 const initialValues = {
   firstName: '',
@@ -17,7 +19,12 @@ const initialValues = {
 };
 
 const RegistrationForm = (props) => {
-  const [_, dispatch] = useContext(UserContext);
+  const dispatch = useDispatch();
+
+  const { userRequest, userSuccess, userError } = bindActionCreators(
+    UserActionCreators,
+    dispatch
+  );
 
   const handleSubmit = async (values, formikBag) => {
     const { gender, ...restUser } = values;
@@ -28,7 +35,7 @@ const RegistrationForm = (props) => {
     };
 
     // запам'ятовуємо у стані що робимо запит на сервер
-    dispatch({ type: 'userRequest' });
+    userRequest();
 
     try {
       // запит на сервер
@@ -38,12 +45,12 @@ const RegistrationForm = (props) => {
         },
       } = await registration(newUserData);
       // при успішному запиту зберігаємо юзера
-      dispatch({ type: 'userSuccess', user });
+      userSuccess( user );
     } catch (error) {
       // при неуспішному запиту зберігаємо помилку
-      dispatch({ type: 'userError', error });
+      userError( error );
     }
-    
+
     formikBag.resetForm();
   };
 

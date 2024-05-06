@@ -17,7 +17,9 @@ const PrivateRoute = ({ user, isLoading, error, ...props }) => {
   if (user) {
     return <Route {...props} />;
   }
-
+  console.log(isLoading)
+  console.log(user)
+  console.log(error)
   // якщо даних користувача немає і ми не вантажимо їх то можна переенаправити гостя на головну
   return <Redirect to='/' />;
 };

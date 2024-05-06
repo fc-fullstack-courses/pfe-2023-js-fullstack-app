@@ -1,8 +1,10 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import cx from 'classnames';
+import { bindActionCreators } from 'redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { USER_UPDATE_SCHEMA } from '../../../validation/userValidation';
-import UserContext from '../../../contexts/userContext';
+import * as UserActionCreators from '../../../redux/actions/userActionCreators';
 import styles from './UpdateUserForm.module.scss';
 
 const initialValues = {
@@ -16,7 +18,10 @@ const initialValues = {
 };
 
 const UpdateUserForm = (props) => {
-  const [{ user }, dispatch] = useContext(UserContext);
+  const { user, isLoading, error } = useSelector((state) => state.user);
+  const dispatch = useDispatch();
+
+  const { userSuccess } = bindActionCreators(UserActionCreators, dispatch);
 
   const handleSubmit = (values, formikBag) => {
     const updatedUserFields = {};
@@ -32,12 +37,9 @@ const UpdateUserForm = (props) => {
     console.log(updatedUserFields);
 
     // TODO переробити на запит на сервер
-    dispatch({
-      type: 'userSuccess',
-      user: {
-        ...user,
-        ...updatedUserFields,
-      },
+    userSuccess({
+      ...user,
+      ...updatedUserFields,
     });
   };
 

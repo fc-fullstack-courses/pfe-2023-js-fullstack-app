@@ -1,17 +1,19 @@
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import cx from 'classnames';
+import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import Header from '../../components/Header';
 import UserProfile from '../../components/UserProfile';
 import styles from './ProfilePage.module.scss';
-import UserContext from '../../contexts/userContext';
 import UpdateUserForm from '../../components/formComponents/UpdateUserForm';
 import DeleteConfirmationModal from '../../components/modals/DeleteConfirmationModal';
 
 const ProfilePage = (props) => {
   const [isProfileUpdating, setIsProfileUpdating] = useState(false);
   const [isModalVisible, setIsModalVisible] = useState(false);
-  const [{ user }, dispatch] = useContext(UserContext);
+
+  const { user, isLoading, error } = useSelector((state) => state.user);
+
   const history = useHistory();
 
   const handleDeleteProfile = () => {
