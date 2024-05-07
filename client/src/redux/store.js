@@ -1,6 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit';
 import counterReducer from './slices/counterSlice';
 import themeReducer from './slices/themeSlice';
+import userReducer from './slices/userSlice';
 
 
 // переробити стор у проекті на тулкіт
@@ -8,7 +9,8 @@ import themeReducer from './slices/themeSlice';
 const store = configureStore({
   reducer: {
     counter: counterReducer,
-    theme: themeReducer
+    theme: themeReducer,
+    user: userReducer
   }
 });
 

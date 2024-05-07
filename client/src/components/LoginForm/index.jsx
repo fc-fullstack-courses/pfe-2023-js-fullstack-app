@@ -4,18 +4,14 @@ import { connect } from 'react-redux';
 import cx from 'classnames';
 import { USER_LOGIN_SCHEMA } from '../../validation/userValidation';
 import styles from './LoginForm.module.scss';
-import * as UserActionCreators from '../../redux/actions/userActionCreators';
+import { login } from '../../redux/slices/userSlice';
 
 const initialValues = {
   email: '',
   password: '',
 };
 
-const LoginForm = ({
-  isLoading,
-  error,
-  userLoginRequest,
-}) => {
+const LoginForm = ({ isLoading, error, userLoginRequest }) => {
   const handleSubmit = async (values, formikBag) => {
     // запам'ятовуємо у стані що робимо запит на сервер
     userLoginRequest(values);
@@ -74,7 +70,7 @@ const LoginForm = ({
 const mStP = (state) => state.user;
 
 const mDtP = {
-  ...UserActionCreators,
+  userLoginRequest: login,
 };
 
 export default connect(mStP, mDtP)(LoginForm);
