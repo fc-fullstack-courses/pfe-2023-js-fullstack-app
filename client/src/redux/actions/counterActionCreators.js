@@ -20,6 +20,8 @@ export const decrement = createAction('counter/decrement');
 
 export const changeStep = createAction('counter/changeStep');
 
+export const reset = createAction('counter/reset');
+
 // const act1 = increment();
 // console.log(act1);
 
