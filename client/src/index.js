@@ -19,7 +19,7 @@ root.render(
     <Router>
       <App />
     </Router>
-    <ReduxCounterHooksComponent />
+    {/* <ReduxCounterHooksComponent /> */}
     <ReduxCounterComponent />
     {/* <ThemeSwitcher />
      */}
