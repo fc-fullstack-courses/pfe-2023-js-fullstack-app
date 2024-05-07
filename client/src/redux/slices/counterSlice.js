@@ -14,6 +14,9 @@ const initialState = {
   step: 1,
 };
 
+// створити слайс для теми сайту / лічільника та переконатися в його
+// корректній роботі
+
 const counterSlice = createSlice({
   name: 'counter',
   initialState,

@@ -39,7 +39,7 @@ function mapStateToProps(state) {
   // об'єкт, який функція повертає буде заспреджено до пропсів
   return {
     ...counter,
-    // theme: theme.currentTheme,
+    theme: theme.currentTheme,
     // test: 'this is from mapStateToProps'
   };
 }

@@ -21,8 +21,7 @@ root.render(
     </Router>
     {/* <ReduxCounterHooksComponent /> */}
     <ReduxCounterComponent />
-    {/* <ThemeSwitcher />
-     */}
+    <ThemeSwitcher />
   </Provider>
 );
 

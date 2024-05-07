@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import CONSTANTS from './constants';
-import { changeThemeCreator } from './redux/actions/actionCreators';
+import { changeTheme } from './redux/slices/themeSlice';
 
 const { THEMES} = CONSTANTS;
 
@@ -24,7 +24,7 @@ const mStP = (state) => ({
 });
 
 const mDtp = dispatch => ({
-  changeTheme: ({target: {value}}) => dispatch(changeThemeCreator(value))
+  changeTheme: ({target: {value}}) => dispatch(changeTheme(value))
 });
 
 export default connect(mStP, mDtp)(ThemeSwitcher);

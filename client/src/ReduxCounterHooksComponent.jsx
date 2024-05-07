@@ -19,7 +19,7 @@ const { THEMES } = CONSTANTS;
 
 const ReduxCounterHooksComponent = (props) => {
   // 1. отримання даних зі стори
-  const theme = useSelector((state) => state.theme.currentTheme);
+  // const theme = useSelector((state) => state.theme.currentTheme);
 
   const { count, step } = useSelector((state) => state.counter);
 
@@ -45,13 +45,13 @@ const ReduxCounterHooksComponent = (props) => {
     dispatch
   );
 
-  const className = cx(styles.container, {
-    [styles.darkTheme]: theme === THEMES.DARK_THEME,
-    [styles.lightTheme]: theme === THEMES.LIGHT_THEME,
-  });
+  // const className = cx(styles.container, {
+  //   [styles.darkTheme]: theme === THEMES.DARK_THEME,
+  //   [styles.lightTheme]: theme === THEMES.LIGHT_THEME,
+  // });
 
   return (
-    <div className={className}>
+    <div>
       <p>Current count is {count}</p>
       <div>
         <label>
