@@ -1,5 +1,9 @@
 import { produce } from 'immer';
-import ACTION_TYPES from '../actions/actionTypes';
+import {
+  increment,
+  decrement,
+  changeStep,
+} from '../actions/counterActionCreators';
 
 const initialState = {
   count: 0,
@@ -10,7 +14,7 @@ const initialState = {
 function counterReducer(state = initialState, action) {
   // найчастіше в редюсерах використовують switch ... case
   switch (action.type) {
-    case ACTION_TYPES.INCREMENT: {
+    case increment.type: {
       const nextIncrement = produce((draftState, action) => {
         draftState.count = draftState.count + draftState.step;
       });
@@ -18,12 +22,12 @@ function counterReducer(state = initialState, action) {
       const newState = nextIncrement(state, action);
       return newState;
     }
-    case ACTION_TYPES.DECREMENT: {
+    case decrement.type: {
       return produce((draftState, action) => {
         draftState.count = draftState.count - draftState.step;
       })(state, action);
     }
-    case ACTION_TYPES.CHANGE_STEP: {
+    case changeStep.type: {
       return produce((draftState, action) => {
         draftState.step = Number(action.payload);
       })(state, action);

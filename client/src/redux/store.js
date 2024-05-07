@@ -1,5 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
 import rootReducer from './reducers';
+import test from './actions/counterActionCreators';
 
 // import { legacy_createStore as createStore, applyMiddleware } from 'redux';
 // import { composeWithDevTools } from '@redux-devtools/extension';

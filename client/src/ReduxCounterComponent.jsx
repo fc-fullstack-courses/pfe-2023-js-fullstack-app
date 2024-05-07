@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import cx from 'classnames';
-import * as ActionCreators from './redux/actions/actionCreators';
+import * as ActionCreators from './redux/actions/counterActionCreators';
 import styles from './ReduxCounterComponent.module.scss';
 import CONSTANTS from './constants';
 
@@ -62,9 +62,9 @@ function mapStateToProps(state) {
 // до пропсів передадуть функції ідентичні по назвам і аргументам креаторам
 // але які будуть одразу діспатчити правильний екшн
 const mapDispatchToProps = {
-  increment: ActionCreators.incrementCreator,
-  decrement: ActionCreators.decrementCreator,
-  changeStep: ActionCreators.changeStepCreator,
+  increment: ActionCreators.increment,
+  decrement: ActionCreators.decrement,
+  changeStep: ActionCreators.changeStep,
 };
 
 // function test(actionCreator) {
