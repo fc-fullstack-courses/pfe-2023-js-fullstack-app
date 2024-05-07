@@ -1,4 +1,3 @@
-import { combineReducers } from "redux";
 import counterReducer from "./counterReducer";
 import themeReducer from "./themeReducer";
 import userReducer from "./userReducer";
@@ -9,11 +8,11 @@ import userReducer from "./userReducer";
   основі кореневий редюсер
 
 */
-const rootReducer = combineReducers({
+const rootReducer = {
   counter: counterReducer,
   theme: themeReducer,
   user: userReducer
-});
+};
 
 /*
   стейт в сторі в такому випадку
