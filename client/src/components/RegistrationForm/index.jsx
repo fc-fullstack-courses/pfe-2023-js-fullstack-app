@@ -1,12 +1,10 @@
 import React from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
-import { bindActionCreators } from 'redux';
 import { useDispatch } from 'react-redux';
 import cx from 'classnames';
-import { registration } from '../../api';
 import { USER_REGISTRATION_SCHEMA } from '../../validation/userValidation';
 import styles from './RegistrationForm.module.scss';
-import * as UserActionCreators from '../../redux/actions/userActionCreators';
+import { registration } from '../../redux/slices/userSlice';
 
 const initialValues = {
   firstName: '',
@@ -21,11 +19,6 @@ const initialValues = {
 const RegistrationForm = (props) => {
   const dispatch = useDispatch();
 
-  const { userRequest, userSuccess, userError } = bindActionCreators(
-    UserActionCreators,
-    dispatch
-  );
-
   const handleSubmit = async (values, formikBag) => {
     const { gender, ...restUser } = values;
 
@@ -34,22 +27,7 @@ const RegistrationForm = (props) => {
       isMale: gender === 'male',
     };
 
-    // запам'ятовуємо у стані що робимо запит на сервер
-    userRequest();
-
-    try {
-      // запит на сервер
-      const {
-        data: {
-          data: { user },
-        },
-      } = await registration(newUserData);
-      // при успішному запиту зберігаємо юзера
-      userSuccess( user );
-    } catch (error) {
-      // при неуспішному запиту зберігаємо помилку
-      userError( error );
-    }
+    dispatch(registration(newUserData));
 
     formikBag.resetForm();
   };

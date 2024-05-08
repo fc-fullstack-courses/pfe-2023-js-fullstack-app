@@ -58,11 +58,28 @@ const refresh = createAsyncThunk(
       } = await API.refresh(refreshToken);
 
       // повертання чогось тут буде розцінене як наше бажання зробити
-      // діспатч екшена успшного виконання 
+      // діспатч екшена успшного виконання
       return user; // user/refresh/fullfilled
     } catch (error) {
       // рефреш провалився
       return thunkAPI.rejectWithValue(error.response.data.error.message); // user/refresh/rejected
+    }
+  }
+);
+
+const registration = createAsyncThunk(
+  `${SLICE_NAME}/registration`,
+  async function (registrationData, thunkAPI) {
+    try {
+      const {
+        data: {
+          data: { user },
+        },
+      } = await API.registration(registrationData);
+
+      return user;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.response.data.error.message);
     }
   }
 );
@@ -94,6 +111,11 @@ const userSlice = createSlice({
       state.error = null;
     });
 
+    builder.addCase(registration.pending, (state) => {
+      state.isLoading = true;
+      state.error = null;
+    });
+
     // описуємо що відбувається при успіху запиту
     builder.addCase(login.fulfilled, (state, action) => {
       state.isLoading = false;
@@ -101,6 +123,11 @@ const userSlice = createSlice({
     });
 
     builder.addCase(refresh.fulfilled, (state, action) => {
+      state.isLoading = false;
+      state.user = action.payload;
+    });
+
+    builder.addCase(registration.fulfilled, (state, action) => {
       state.isLoading = false;
       state.user = action.payload;
     });
@@ -115,11 +142,16 @@ const userSlice = createSlice({
       state.isLoading = false;
       state.error = action.payload;
     });
+
+    builder.addCase(registration.rejected, (state, action) => {
+      state.isLoading = false;
+      state.error = action.payload;
+    });
   },
 });
 
 const { reducer: userReducer, actions } = userSlice;
 
 export const { logout } = actions;
-export { login, refresh };
+export { login, refresh, registration };
 export default userReducer;
