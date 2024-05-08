@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { Switch, Route } from 'react-router-dom';
-import { connect } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import HomePage from './pages/Home';
 import ProfilePage from './pages/Profile';
 import RegistrationPage from './pages/Registration';
@@ -10,17 +10,18 @@ import CONSTANTS from './constants';
 import PrivateRoute from './components/PrivateRoute';
 import PublicOnlyRoute from './components/PublicOnlyRoute';
 import ChatsPage from './pages/Chats';
-import * as UserActionCreators from './redux/actions/userActionCreators';
+import { refresh } from './redux/slices/userSlice';
 
 function App(props) {
-  const { userRefreshRequest } = props;
+  const dispatch = useDispatch();
+
   // спроба виконання рефреш - запиту
   useEffect(() => {
     const token = window.localStorage.getItem(CONSTANTS.REFRESH_TOKEN);
 
     // якщо токен існує то робимо запит на рефреш даних користувача
     if (token) {
-      userRefreshRequest(token);
+      dispatch(refresh(token));
     }
   }, []);
 
@@ -36,11 +37,4 @@ function App(props) {
   );
 }
 
-// const mStP = (state) => {};
-
-const mDtP = {
-  ...UserActionCreators,
-};
-
-// якщо потрібно вказати діспатч ту пропс але до стейту під'єднуватися не треба
-export default connect(null, mDtP)(App);
+export default App;
