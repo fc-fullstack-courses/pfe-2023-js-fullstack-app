@@ -21,7 +21,21 @@ io.on('connection', function (socket) {
   // socket - екземпляр з'єднання кліента з серваком
 
   console.log('client connected');
-  console.log(socket);
+  
+  // додаємо слухач події з клієнту
+  socket.on('buttonClick', (obj, num, bool, nullVar) => {
+    console.log(`data is :`);
+    console.log(obj);
+    console.log(num);
+    console.log(bool);
+    console.log(nullVar);
+
+    // відправляє подію buttonClick конкретному сокету (аналог res.send)
+    // socket.emit('buttonClick', 'some user bressed button');
+
+    // відправляє подію buttonClick усім під'єданим клієнтам одночасно
+    io.emit('buttonClick', 'some user bressed button');
+  });
 });
 
 server.listen(port, host, () => {

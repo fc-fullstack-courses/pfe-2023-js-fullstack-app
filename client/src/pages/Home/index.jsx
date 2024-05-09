@@ -7,7 +7,10 @@ import * as WS_API from '../../api/ws';
 function HomePage() {
   return (
     <>
-     <Header />
+      <Header />
+      <button onClick={() => WS_API.sendBtnClick()}>
+        This will emit WS event
+      </button>
     </>
   );
 }
