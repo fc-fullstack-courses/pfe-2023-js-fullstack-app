@@ -8,7 +8,7 @@ function ChatList({ chats = [], ...rest }) {
       {chats.length && (
         <ul>
           {chats.map((c) => (
-            <ChatItem chat={c} {...rest} />
+            <ChatItem key={c._id} chat={c} {...rest} />
           ))}
         </ul>
       )}

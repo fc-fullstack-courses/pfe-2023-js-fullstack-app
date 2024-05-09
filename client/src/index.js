@@ -5,23 +5,14 @@ import { Provider } from 'react-redux';
 import './reset.css';
 import './index.css';
 import App from './App';
-import UseReducerComponent from './UseReducerComponent';
-import ReduxCounterComponent from './ReduxCounterComponent';
 import store from './redux/store';
-import ThemeSwitcher from './ThemeSwitcher';
-import ReduxCounterHooksComponent from './ReduxCounterHooksComponent';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  // <React.StrictMode>
-  // </React.StrictMode>
   <Provider store={store}>
     <Router>
       <App />
     </Router>
-    {/* <ReduxCounterHooksComponent /> */}
-    <ReduxCounterComponent />
-    <ThemeSwitcher />
   </Provider>
 );
 
