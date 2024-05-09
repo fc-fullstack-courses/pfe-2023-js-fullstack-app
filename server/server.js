@@ -2,6 +2,7 @@ const http = require('http');
 const { Server } = require('socket.io');
 const app = require('./app');
 const config = require('./configs/server.json');
+const { Message } = require('./models');
 
 const server = http.createServer(app);
 
@@ -10,8 +11,8 @@ const port = config.PORT;
 
 const io = new Server(server, {
   cors: {
-    origin: '*'
-  }
+    origin: '*',
+  },
 });
 
 // on - аналог addEventListener
@@ -21,7 +22,7 @@ io.on('connection', function (socket) {
   // socket - екземпляр з'єднання кліента з серваком
 
   console.log('client connected');
-  
+
   // додаємо слухач події з клієнту
   socket.on('buttonClick', (obj, num, bool, nullVar) => {
     console.log(`data is :`);
@@ -35,6 +36,19 @@ io.on('connection', function (socket) {
 
     // відправляє подію buttonClick усім під'єданим клієнтам одночасно
     io.emit('buttonClick', 'some user bressed button');
+  });
+
+  socket.on('newChatMessage', async ({ author, ...restMessage }) => {
+    try {
+      const newMessage = await Message.create({
+        ...restMessage,
+        author: author._id,
+      });
+
+      io.emit('newMessage', { newMessage, author });
+    } catch (error) {
+      socket.emit('newMessageError', error);
+    }
   });
 });
 

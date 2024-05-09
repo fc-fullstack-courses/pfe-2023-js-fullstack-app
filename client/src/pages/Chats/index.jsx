@@ -12,6 +12,7 @@ function ChatsPage() {
     chats: { chats },
     chat: { chat },
     user: { _id: userId },
+    user
   } = useSelector((state) => ({
     chats: state.chats,
     chat: state.currentChat,
@@ -33,7 +34,7 @@ function ChatsPage() {
           <ChatList chats={chats} chatId={chat?._id} />
         </aside>
         <main className={styles.chatAreaWrapper}>
-          <ChatArea chat={chat} userId={userId} />
+          <ChatArea chat={chat} user={user} />
         </main>
       </div>
     </>

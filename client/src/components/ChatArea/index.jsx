@@ -1,12 +1,17 @@
-import React from 'react';
+import React, { useState } from 'react';
 import classNames from 'classnames';
 import styles from './ChatArea.module.scss';
 import ChatLogo from '../ChatLogo';
+import { addNewMessage } from '../../api/ws';
 
-function ChatArea({ chat, userId }) {
+function ChatArea({ chat, user }) {
   const inputPlaceholder = 'Enter your text';
 
-  const chatAreaClassNames = classNames(styles.chatArea, {[styles.chatAreaNoChat]: !chat});
+  const [message, setMessage] = useState('');
+
+  const chatAreaClassNames = classNames(styles.chatArea, {
+    [styles.chatAreaNoChat]: !chat,
+  });
 
   if (!chat)
     return (
@@ -25,7 +30,7 @@ function ChatArea({ chat, userId }) {
         <ul className={styles.messageList}>
           {chat.messages.map((m) => {
             const styleMessageItem = classNames(styles.messageItem, {
-            [styles.own]: m.author?._id === userId,
+              [styles.own]: m.author?._id === user?._id,
             });
 
             return (
@@ -46,8 +51,18 @@ function ChatArea({ chat, userId }) {
           type='text'
           placeholder={inputPlaceholder}
           autoFocus
+          value={message}
+          onChange={({target: {value}}) => setMessage(value)}
         />
-        <button className={styles.messageSendBtn}>Send</button>
+        <button className={styles.messageSendBtn} onClick={() => {
+          addNewMessage({
+            text: message,
+            author: user,
+            chat: chat._id
+          });
+
+          setMessage('');
+        }}>Send</button>
       </section>
     </article>
   );
