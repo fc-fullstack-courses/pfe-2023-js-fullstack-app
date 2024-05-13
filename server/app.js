@@ -3,13 +3,19 @@ const cors = require('cors');
 const rootRouter = require('./routers');
 const { errorHandler } = require('./middlewares/errors');
 
-const app = express();
 
-app.use(express.json());
-app.use(cors());
+function createServer() {
+  const app = express();
 
-app.use(rootRouter);
+  app.use(express.json());
+  app.use(cors());
+  
+  app.use(rootRouter);
+  
+  app.use(errorHandler);
 
-app.use(errorHandler);
+  return app;
+}
 
-module.exports = app;
+
+module.exports = createServer;
